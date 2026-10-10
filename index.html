@@ -4,12 +4,13 @@
   <meta charset="UTF-8">
   <title>Registro de usuario</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="main.js" defer></script>
 </head>
 <body>
 
   <!-- #24 Maquetar el formulario de registro -->
   <h2>Registro de usuario</h2>
-  <form id="registro">
+  <form id="registro" onsubmit="return validarRegistro()">
     <label>Nombre</label>
     <input type="text" id="nombre">
 
