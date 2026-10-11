@@ -13,14 +13,18 @@
   <form id="registro" onsubmit="return validarRegistro()">
     <label>Nombre</label>
     <input type="text" id="nombre">
+    <span class="error" id="errorNombre"></span>
 
     <label>Email</label>
     <input type="text" id="email">
+    <span class="error" id="errorEmail"></span>
 
     <label>Contraseña</label>
     <input type="password" id="password">
+    <span class="error" id="errorPassword"></span>
 
     <button type="submit">Registrarse</button>
+    <p id="mensajeRegistro"></p>
   </form>
 
 </body>

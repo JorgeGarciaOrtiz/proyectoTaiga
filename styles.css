@@ -19,3 +19,12 @@ button {
   margin-top: 15px;
   padding: 8px 16px;
 }
+
+.error {
+  color: red;
+  font-size: 14px;
+}
+
+#mensajeRegistro {
+  color: green;
+}
