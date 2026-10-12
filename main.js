@@ -55,8 +55,8 @@ function validarLogin() {
     return false;
   }
 
- 
-  if (email.indexOf("@") == -1 && email.indexOf(".") == -1) {
+  // Email con formato válido
+  if (email.indexOf("@") == -1 || email.indexOf(".") == -1) {
     document.getElementById("errorLoginEmail").textContent = "El email no es válido";
     return false;
   }
