@@ -2,9 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Registro de usuario</title>
+  <title>Registro e inicio de sesión</title>
   <link rel="stylesheet" href="styles.css">
-  <script src="main.js" defer></script>
 </head>
 <body>
 
@@ -27,5 +26,22 @@
     <p id="mensajeRegistro"></p>
   </form>
 
+  <hr>
+
+  <!-- Inicio de sesión -->
+  <h2>Inicio de sesión</h2>
+  <form id="login" onsubmit="return validarLogin()">
+    <label>Email</label>
+    <input type="text" id="loginEmail">
+    <span class="error" id="errorLoginEmail"></span>
+
+    <label>Contraseña</label>
+    <input type="password" id="loginPassword">
+
+    <button type="submit">Entrar</button>
+    <p id="mensajeLogin"></p>
+  </form>
+
+  <script src="script.js"></script>
 </body>
 </html>

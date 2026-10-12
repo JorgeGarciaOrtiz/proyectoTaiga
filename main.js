@@ -40,3 +40,27 @@ function validarRegistro() {
 
   return false; // evita que se recargue la página
 }
+
+// #27 Validar email (inicio de sesión)
+function validarLogin() {
+  var email = document.getElementById("loginEmail").value;
+
+  // Limpiar mensajes anteriores
+  document.getElementById("errorLoginEmail").textContent = "";
+  document.getElementById("mensajeLogin").textContent = "";
+
+  // Email obligatorio
+  if (email == "") {
+    document.getElementById("errorLoginEmail").textContent = "El email es obligatorio";
+    return false;
+  }
+
+ 
+  if (email.indexOf("@") == -1 && email.indexOf(".") == -1) {
+    document.getElementById("errorLoginEmail").textContent = "El email no es válido";
+    return false;
+  }
+
+  document.getElementById("mensajeLogin").textContent = "Email correcto";
+  return false; // evita que se recargue la página
+}

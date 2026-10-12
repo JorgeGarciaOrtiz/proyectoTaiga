@@ -25,6 +25,7 @@ button {
   font-size: 14px;
 }
 
-#mensajeRegistro {
+#mensajeRegistro,
+#mensajeLogin {
   color: green;
 }
