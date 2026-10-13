@@ -42,11 +42,14 @@ function validarRegistro() {
 }
 
 // #27 Validar email (inicio de sesión)
+// #28 Mostrar error si las credenciales son incorrectas
 function validarLogin() {
   var email = document.getElementById("loginEmail").value;
+  var password = document.getElementById("loginPassword").value;
 
   // Limpiar mensajes anteriores
   document.getElementById("errorLoginEmail").textContent = "";
+  document.getElementById("errorLogin").textContent = "";
   document.getElementById("mensajeLogin").textContent = "";
 
   // Email obligatorio
@@ -61,6 +64,12 @@ function validarLogin() {
     return false;
   }
 
-  document.getElementById("mensajeLogin").textContent = "Email correcto";
+  // Comprobar credenciales (usuario de prueba)
+  if (email == "demo@correo.com" && password == "1234") {
+    document.getElementById("mensajeLogin").textContent = "Bienvenido";
+  } else {
+    document.getElementById("errorLogin").textContent = "Email o contraseña incorrectos";
+  }
+
   return false; // evita que se recargue la página
 }
