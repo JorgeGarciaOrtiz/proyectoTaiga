@@ -1,0 +1,10 @@
+/* Tarjeta de cada profesor */
+.profesor {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.profesor h3 {
+  margin: 0 0 5px 0;
+}
