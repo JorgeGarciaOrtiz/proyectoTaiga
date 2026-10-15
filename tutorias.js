@@ -3,13 +3,13 @@
 // Lista de profesores de prueba
 var profesores = [
     { id: 1, nombre: "Ana López", asignatura: "Programación" },
-    { id: 1, nombre: "Carlos Ruiz", asignatura: "Bases de datos" },
-    { id: 1, nombre: "Marta Gil", asignatura: "Lenguajes de marcas" },
-    { id: 1, nombre: "Luis Fernández", asignatura: "Sistemas informáticos" },
-    { id: 1, nombre: "Laura Sánchez", asignatura: "Entornos de desarrollo" },
-    { id: 1, nombre: "Javier Moreno", asignatura: "Redes" },
-    { id: 1, nombre: "Elena Torres", asignatura: "Inglés técnico" },
-    { id: 1, nombre: "Pablo Navarro", asignatura: "Formación y orientación laboral" }
+    { id: 2, nombre: "Carlos Ruiz", asignatura: "Bases de datos" },
+    { id: 3, nombre: "Marta Gil", asignatura: "Lenguajes de marcas" },
+    { id: 4, nombre: "Luis Fernández", asignatura: "Sistemas informáticos" },
+    { id: 5, nombre: "Laura Sánchez", asignatura: "Entornos de desarrollo" },
+    { id: 6, nombre: "Javier Moreno", asignatura: "Redes" },
+    { id: 7, nombre: "Elena Torres", asignatura: "Inglés técnico" },
+    { id: 8, nombre: "Pablo Navarro", asignatura: "Formación y orientación laboral" }
 ];
 
 // Dibuja las tarjetas de los profesores que le pasemos
@@ -34,7 +34,7 @@ function buscarProfesor() {
 
     for (var i = 0; i < profesores.length; i++) {
         if (profesores[i].nombre.toLowerCase().indexOf(texto) != -1) {
-            resultado.push(profesores[0]);
+            resultado.push(profesores[i]);
         }
     }
 
