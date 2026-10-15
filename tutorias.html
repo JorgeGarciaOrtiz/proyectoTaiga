@@ -1,34 +1,23 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Tutorías</title>
   <link rel="stylesheet" href="tutorias.css">
   <script src="tutorias.js" defer></script>
 </head>
+
 <body>
 
   <!-- #29 Maquetar la lista de profesores -->
   <h2>Profesores</h2>
 
-  <input type="text" id="buscador" placeholder="Buscar profesor...">
+  <input type="text" id="buscador" placeholder="Buscar profesor..." onkeyup="buscarProfesor()">
 
-  <!-- Tarjetas de ejemplo -->
-  <div id="listaProfesores">
-
-    <div class="profesor">
-      <h3>Ana López</h3>
-      <p>Asignatura: Programación</p>
-      <button>Ver horarios</button>
-    </div>
-
-    <div class="profesor">
-      <h3>Carlos Ruiz</h3>
-      <p>Asignatura: Bases de datos</p>
-      <button>Ver horarios</button>
-    </div>
-
-  </div>
+  <!-- #30 Las tarjetas se generan con JavaScript -->
+  <div id="listaProfesores"></div>
 
 </body>
+
 </html>
