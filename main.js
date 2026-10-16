@@ -66,7 +66,9 @@ function validarLogin() {
 
   // Comprobar credenciales (usuario de prueba)
   if (email == "demo@correo.com" && password == "1234") {
-    document.getElementById("mensajeLogin").textContent = "Bienvenido";
+    // Guardamos el usuario y pasamos a la página de tutorías
+    localStorage.setItem("usuario", email);
+    window.location.href = "tutorias.html";
   } else {
     document.getElementById("errorLogin").textContent = "Email o contraseña incorrectos";
   }

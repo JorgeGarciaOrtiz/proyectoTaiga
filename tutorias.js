@@ -1,3 +1,18 @@
+// Comprobar que hay sesión iniciada
+var usuario = localStorage.getItem("usuario");
+if (usuario == null) {
+    // Si no ha iniciado sesión, vuelve al login
+    window.location.href = "index.html";
+} else {
+    document.getElementById("nombreUsuario").textContent = usuario;
+}
+
+// Cerrar sesión
+function cerrarSesion() {
+    localStorage.removeItem("usuario");
+    window.location.href = "index.html";
+}
+
 // #30 Mostrar profesores con JavaScript
 
 // Lista de profesores de prueba
