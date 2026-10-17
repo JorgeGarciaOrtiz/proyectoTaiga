@@ -1,7 +1,7 @@
 /* General */
 body {
   font-family: Arial, sans-serif;
-  max-width: 500px;
+  max-width: 1300px;
   margin: 30px auto;
   padding: 0 15px;
   background-color: #f5f7fa;
@@ -12,16 +12,39 @@ h2 {
   color: #1f3a5f;
 }
 
-hr {
-  margin: 30px 0;
-  border: none;
-  border-top: 1px solid #ccc;
+/* Línea de sesión iniciada (centrada arriba) */
+body > p {
+  text-align: center;
+}
+
+/* Tres columnas: hueco vacío, profesores (centro) y horarios (derecha) */
+.contenedor {
+  display: grid;
+  grid-template-columns: 1fr minmax(320px, 500px) 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.columna-profesores {
+  grid-column: 2;
+}
+
+.columna-profesores h2 {
+  text-align: center;
+}
+
+.columna-horarios {
+  grid-column: 3;
+  max-width: 420px;
+  position: sticky;
+  top: 20px;
 }
 
 /* Buscador */
 input {
   width: 100%;
-  padding: 8px;
+  padding: 10px;
+  font-size: 16px;
   box-sizing: border-box;
   border: 1px solid #aaa;
   border-radius: 4px;
@@ -29,7 +52,8 @@ input {
 
 /* Botones */
 button {
-  padding: 6px 14px;
+  padding: 8px 18px;
+  font-size: 15px;
   background-color: #1f3a5f;
   color: white;
   border: none;
@@ -41,21 +65,23 @@ button:hover {
   background-color: #2f5688;
 }
 
-/* Tarjeta de cada profesor */
+/* Tarjeta de cada profesor (más grande) */
 .profesor {
   background-color: white;
   border: 1px solid #ccc;
-  border-radius: 6px;
-  padding: 10px;
-  margin-top: 10px;
+  border-radius: 8px;
+  padding: 25px;
+  margin-top: 20px;
 }
 
 .profesor h3 {
-  margin: 0 0 5px 0;
+  margin: 0 0 10px 0;
+  font-size: 22px;
 }
 
 .profesor p {
-  margin: 0 0 10px 0;
+  margin: 0 0 18px 0;
+  font-size: 16px;
 }
 
 /* Tabla de horarios */
@@ -81,4 +107,21 @@ th {
 .error {
   color: red;
   font-size: 14px;
+}
+
+/* En pantallas pequeñas, todo va en una sola columna */
+@media (max-width: 1000px) {
+  .contenedor {
+    display: block;
+  }
+
+  .columna-profesores,
+  .columna-horarios {
+    max-width: none;
+    position: static;
+  }
+
+  .columna-horarios {
+    margin-top: 30px;
+  }
 }

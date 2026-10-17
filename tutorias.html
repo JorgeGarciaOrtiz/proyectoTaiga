@@ -15,31 +15,38 @@
     <button onclick="cerrarSesion()">Cerrar sesión</button>
   </p>
 
-  <!-- #29 Maquetar la lista de profesores -->
-  <h2>Profesores</h2>
+  <!-- Dos columnas: profesores a la izquierda y horarios a la derecha -->
+  <div class="contenedor">
 
-  <input type="text" id="buscador" placeholder="Buscar profesor..." onkeyup="buscarProfesor()">
+    <div class="columna-profesores">
+      <!-- #29 Maquetar la lista de profesores -->
+      <h2>Profesores</h2>
 
-  <!-- #30 Las tarjetas se generan con JavaScript -->
-  <div id="listaProfesores"></div>
+      <input type="text" id="buscador" placeholder="Buscar profesor..." onkeyup="buscarProfesor()">
 
-  <hr>
+      <!-- #30 Las tarjetas se generan con JavaScript -->
+      <div id="listaProfesores"></div>
+    </div>
 
-  <!-- #31 Maquetar la tabla de horarios -->
-  <h2>Horarios disponibles</h2>
-  <p id="profesorElegido">Elige un profesor para ver sus horarios</p>
+    <div class="columna-horarios">
+      <!-- #31 Maquetar la tabla de horarios -->
+      <h2>Horarios disponibles</h2>
+      <p id="profesorElegido">Elige un profesor para ver sus horarios</p>
 
-  <table id="tablaHorarios">
-    <thead>
-      <tr>
-        <th>Día</th>
-        <th>Hora</th>
-        <th>Estado</th>
-      </tr>
-    </thead>
-    <tbody id="cuerpoHorarios"></tbody>
-  </table>
-  <p class="error" id="mensajeHorarios"></p>
+      <table id="tablaHorarios">
+        <thead>
+          <tr>
+            <th>Día</th>
+            <th>Hora</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody id="cuerpoHorarios"></tbody>
+      </table>
+      <p class="error" id="mensajeHorarios"></p>
+    </div>
+
+  </div>
 
 </body>
 
