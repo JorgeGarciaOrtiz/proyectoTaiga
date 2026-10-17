@@ -70,7 +70,7 @@ for (var p = 0; p < profesores.length; p++) {
         horarios.push({
             profesorId: profesores[p].id,
             dia: dias[d],
-            hora: horas[d],
+            hora: horas[h],
             libre: true
         });
     }
