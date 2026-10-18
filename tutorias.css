@@ -109,6 +109,15 @@ th {
   font-size: 14px;
 }
 
+/* Colores según el estado del hueco */
+.libre td {
+  background-color: #d4f5d4;
+}
+
+.ocupado td {
+  background-color: #f5d4d4;
+}
+
 /* En pantallas pequeñas, todo va en una sola columna */
 @media (max-width: 1000px) {
   .contenedor {
