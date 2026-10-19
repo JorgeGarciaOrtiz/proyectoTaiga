@@ -124,11 +124,11 @@ function verHorarios(idProfesor) {
             var estado = "Ocupado";
             var clase = "ocupado";
             var boton = ""; // solo los huecos libres tienen botón
-            boton = '<button onclick="abrirReserva(' + j + ')">Reservar</button>';
+            
             if (horarios[j].libre) {
                 estado = "Libre";
                 clase = "libre";
-                
+                boton = '<button onclick="abrirReserva(' + j + ')">Reservar</button>';
             }
 
             cuerpo.innerHTML +=
