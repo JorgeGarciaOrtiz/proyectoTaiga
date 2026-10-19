@@ -77,16 +77,38 @@ for (var p = 0; p < profesores.length - 2; p++) {
     }
 }
 
+// #34 Abrir y cerrar el formulario de reserva
+
+// Nombre del profesor cuyos horarios se están viendo
+var profesorActual = "";
+
+// Muestra el formulario con los datos del hueco elegido
+function abrirReserva(posicion) {
+    document.getElementById("reservaProfesor").textContent = profesorActual;
+    document.getElementById("reservaDia").textContent = horarios[posicion].dia;
+    document.getElementById("reservaHora").textContent = horarios[posicion].hora;
+    document.getElementById("duda").value = "";
+    document.getElementById("formularioReserva").classList.remove("oculto");
+}
+
+// Oculta el formulario
+function cerrarReserva() {
+    document.getElementById("formularioReserva").classList.add("oculto");
+}
+
 // #33 Marcar libres/ocupados y avisar si no hay horarios
 function verHorarios(idProfesor) {
     var cuerpo = document.getElementById("cuerpoHorarios");
     cuerpo.innerHTML = "";
     document.getElementById("mensajeHorarios").textContent = "";
 
+    cerrarReserva(); // al cambiar de profesor se cierra el formulario
+
     // Poner el nombre del profesor en el título
     for (var i = 0; i < profesores.length; i++) {
         if (profesores[i].id == idProfesor) {
             document.getElementById("profesorElegido").textContent = "Horarios de " + profesores[i].nombre;
+            profesorActual = profesores[i].nombre;
         }
     }
 
@@ -101,13 +123,16 @@ function verHorarios(idProfesor) {
             // Por defecto ocupado, y si está libre lo cambiamos
             var estado = "Ocupado";
             var clase = "ocupado";
+            var boton = ""; // solo los huecos libres tienen botón
+            boton = '<button onclick="abrirReserva(' + j + ')">Reservar</button>';
             if (horarios[j].libre) {
                 estado = "Libre";
                 clase = "libre";
+                
             }
 
             cuerpo.innerHTML +=
-                '<tr class="' + clase + '"><td>' + horarios[j].dia + '</td><td>' + horarios[j].hora + '</td><td>' + estado + '</td></tr>';
+                '<tr class="' + clase + '"><td>' + horarios[j].dia + '</td><td>' + horarios[j].hora + '</td><td>' + estado + '</td><td>' + boton + '</td></tr>';
         }
     }
 

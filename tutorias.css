@@ -41,7 +41,7 @@ body > p {
 }
 
 /* Buscador */
-input {
+input, textarea {
   width: 100%;
   padding: 10px;
   font-size: 16px;
@@ -107,6 +107,57 @@ th {
 .error {
   color: red;
   font-size: 14px;
+}
+
+/* #34 Botón "Reservar" dentro de la tabla (más pequeño) */
+td button {
+  padding: 4px 10px;
+  font-size: 14px;
+}
+
+/* #34 Formulario de reserva */
+.oculto {
+  display: none;
+}
+
+.reserva {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.reserva h3 {
+  margin: 0 0 15px 0;
+  color: #1f3a5f;
+}
+
+.reserva p {
+  margin: 0 0 8px 0;
+}
+
+.reserva label {
+  display: block;
+  margin: 15px 0 5px 0;
+}
+
+.reserva textarea {
+  font-family: Arial, sans-serif;
+  resize: vertical;
+}
+
+.reserva button {
+  margin-top: 15px;
+  margin-right: 8px;
+}
+
+button.secundario {
+  background-color: #777;
+}
+
+button.secundario:hover {
+  background-color: #999;
 }
 
 /* Colores según el estado del hueco */

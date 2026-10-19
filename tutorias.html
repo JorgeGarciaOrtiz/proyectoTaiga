@@ -1,53 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tutorías</title>
+    <link rel="stylesheet" href="tutorias.css" />
+    <script src="tutorias.js" defer></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <title>Tutorías</title>
-  <link rel="stylesheet" href="tutorias.css">
-  <script src="tutorias.js" defer></script>
-</head>
+  <body>
+    <!-- Usuario con sesión iniciada -->
+    <p>
+      Sesión iniciada como <span id="nombreUsuario"></span>
+      <button onclick="cerrarSesion()">Cerrar sesión</button>
+    </p>
 
-<body>
+    <!-- Dos columnas: profesores a la izquierda y horarios a la derecha -->
+    <div class="contenedor">
+      <div class="columna-profesores">
+        <!-- #29 Maquetar la lista de profesores -->
+        <h2>Profesores</h2>
 
-  <!-- Usuario con sesión iniciada -->
-  <p>Sesión iniciada como <span id="nombreUsuario"></span>
-    <button onclick="cerrarSesion()">Cerrar sesión</button>
-  </p>
+        <input
+          type="text"
+          id="buscador"
+          placeholder="Buscar profesor..."
+          onkeyup="buscarProfesor()"
+        />
 
-  <!-- Dos columnas: profesores a la izquierda y horarios a la derecha -->
-  <div class="contenedor">
+        <!-- #30 Las tarjetas se generan con JavaScript -->
+        <div id="listaProfesores"></div>
+      </div>
 
-    <div class="columna-profesores">
-      <!-- #29 Maquetar la lista de profesores -->
-      <h2>Profesores</h2>
+      <div class="columna-horarios">
+        <!-- #31 Maquetar la tabla de horarios -->
+        <h2>Horarios disponibles</h2>
+        <p id="profesorElegido">Elige un profesor para ver sus horarios</p>
 
-      <input type="text" id="buscador" placeholder="Buscar profesor..." onkeyup="buscarProfesor()">
+        <table id="tablaHorarios">
+          <thead>
+            <tr>
+              <th>Día</th>
+              <th>Hora</th>
+              <th>Estado</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody id="cuerpoHorarios"></tbody>
+        </table>
+        <p class="error" id="mensajeHorarios"></p>
 
-      <!-- #30 Las tarjetas se generan con JavaScript -->
-      <div id="listaProfesores"></div>
+        <!-- #34 Maquetar el formulario de reserva (oculto hasta pulsar "Reservar") -->
+        <div id="formularioReserva" class="reserva oculto">
+          <h3>Reservar tutoría</h3>
+          <p><strong>Profesor:</strong> <span id="reservaProfesor"></span></p>
+          <p><strong>Día:</strong> <span id="reservaDia"></span></p>
+          <p><strong>Hora:</strong> <span id="reservaHora"></span></p>
+
+          <label for="duda">¿Qué duda quieres resolver?</label>
+          <textarea
+            id="duda"
+            rows="3"
+            placeholder="Escribe aquí tu duda..."
+          ></textarea>
+
+          <!-- El botón de confirmar se conectará en la tarea #35 -->
+          <button id="botonConfirmar">Confirmar reserva</button>
+          <button class="secundario" onclick="cerrarReserva()">Cancelar</button>
+        </div>
+      </div>
     </div>
-
-    <div class="columna-horarios">
-      <!-- #31 Maquetar la tabla de horarios -->
-      <h2>Horarios disponibles</h2>
-      <p id="profesorElegido">Elige un profesor para ver sus horarios</p>
-
-      <table id="tablaHorarios">
-        <thead>
-          <tr>
-            <th>Día</th>
-            <th>Hora</th>
-            <th>Estado</th>
-          </tr>
-        </thead>
-        <tbody id="cuerpoHorarios"></tbody>
-      </table>
-      <p class="error" id="mensajeHorarios"></p>
-    </div>
-
-  </div>
-
-</body>
-
+  </body>
 </html>
