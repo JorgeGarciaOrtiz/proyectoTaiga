@@ -77,13 +77,33 @@ for (var p = 0; p < profesores.length - 2; p++) {
     }
 }
 
+// #35 Volver a marcar como ocupados los huecos ya reservados
+// (los horarios se generan al azar, así que se ajusta la hora de la reserva)
+function aplicarReservas() {
+    var reservas = JSON.parse(localStorage.getItem("reservas")) || [];
+
+    for (var r = 0; r < reservas.length; r++) {
+        for (var k = 0; k < horarios.length; k++) {
+            if (horarios[k].profesorId == reservas[r].profesorId && horarios[k].dia == reservas[r].dia) {
+                horarios[k].hora = reservas[r].hora;
+                horarios[k].libre = false;
+            }
+        }
+    }
+}
+aplicarReservas();
+
 // #34 Abrir y cerrar el formulario de reserva
 
 // Nombre del profesor cuyos horarios se están viendo
 var profesorActual = "";
 
+// Posición del hueco que se está reservando
+var posicionReserva = -1;
+
 // Muestra el formulario con los datos del hueco elegido
 function abrirReserva(posicion) {
+    posicionReserva = posicion;
     document.getElementById("reservaProfesor").textContent = profesorActual;
     document.getElementById("reservaDia").textContent = horarios[posicion].dia;
     document.getElementById("reservaHora").textContent = horarios[posicion].hora;
@@ -94,6 +114,26 @@ function abrirReserva(posicion) {
 // Oculta el formulario
 function cerrarReserva() {
     document.getElementById("formularioReserva").classList.add("oculto");
+}
+
+// #35 Reservar un hueco libre
+function confirmarReserva() {
+    var hueco = horarios[posicionReserva];
+
+    // Guardar la reserva en localStorage
+    var reservas = JSON.parse(localStorage.getItem("reservas")) || [];
+    reservas.push({
+        usuario: usuario,
+        profesorId: hueco.profesorId,
+        profesor: profesorActual,
+        dia: hueco.dia,
+        hora: hueco.hora,
+        duda: document.getElementById("duda").value
+    });
+    localStorage.setItem("reservas", JSON.stringify(reservas));
+
+    // Volver a dibujar la tabla (también cierra el formulario)
+    verHorarios(hueco.profesorId);
 }
 
 // #33 Marcar libres/ocupados y avisar si no hay horarios
