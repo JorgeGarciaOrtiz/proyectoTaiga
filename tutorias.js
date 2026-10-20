@@ -132,6 +132,9 @@ function confirmarReserva() {
     });
     localStorage.setItem("reservas", JSON.stringify(reservas));
 
+    // El hueco pasa a ocupado
+    hueco.libre = false;
+
     // Volver a dibujar la tabla (también cierra el formulario)
     verHorarios(hueco.profesorId);
 }
