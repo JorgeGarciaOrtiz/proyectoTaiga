@@ -147,6 +147,11 @@ td button {
   resize: vertical;
 }
 
+.reserva .error {
+  display: block;
+  margin-top: 5px;
+}
+
 .reserva button {
   margin-top: 15px;
   margin-right: 8px;
