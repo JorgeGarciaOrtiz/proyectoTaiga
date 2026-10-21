@@ -108,6 +108,7 @@ function abrirReserva(posicion) {
     document.getElementById("reservaDia").textContent = horarios[posicion].dia;
     document.getElementById("reservaHora").textContent = horarios[posicion].hora;
     document.getElementById("duda").value = "";
+    document.getElementById("errorDuda").textContent = "";
     document.getElementById("formularioReserva").classList.remove("oculto");
 }
 
@@ -117,8 +118,33 @@ function cerrarReserva() {
 }
 
 // #35 Reservar un hueco libre
+// #36 Validar la duda y mostrar mensajes
 function confirmarReserva() {
     var hueco = horarios[posicionReserva];
+    var duda = document.getElementById("duda").value.trim();
+
+    // Limpiar mensajes anteriores
+    document.getElementById("errorDuda").textContent = "";
+    document.getElementById("mensajeReserva").textContent = "";
+
+    // Comprobar que el hueco sigue libre
+    if (!hueco.libre) {
+        verHorarios(hueco.profesorId);
+        document.getElementById("mensajeHorarios").textContent = "Ese hueco ya está ocupado";
+        return;
+    }
+
+    // La duda es obligatoria
+    if (duda == "") {
+        document.getElementById("errorDuda").textContent = "La duda es obligatoria";
+        return;
+    }
+
+    // La duda tiene que tener al menos 5 caracteres
+    if (duda.length < 5) {
+        document.getElementById("errorDuda").textContent = "Escribe al menos 5 caracteres";
+        return;
+    }
 
     // Guardar la reserva en localStorage
     var reservas = JSON.parse(localStorage.getItem("reservas")) || [];
@@ -128,7 +154,7 @@ function confirmarReserva() {
         profesor: profesorActual,
         dia: hueco.dia,
         hora: hueco.hora,
-        duda: document.getElementById("duda").value
+        duda: duda
     });
     localStorage.setItem("reservas", JSON.stringify(reservas));
 
@@ -137,6 +163,10 @@ function confirmarReserva() {
 
     // Volver a dibujar la tabla (también cierra el formulario)
     verHorarios(hueco.profesorId);
+
+    // Mensaje de confirmación
+    document.getElementById("mensajeReserva").textContent =
+        "Tutoría reservada con " + profesorActual + ": " + hueco.dia + " a las " + hueco.hora;
 }
 
 // #33 Marcar libres/ocupados y avisar si no hay horarios
@@ -144,6 +174,7 @@ function verHorarios(idProfesor) {
     var cuerpo = document.getElementById("cuerpoHorarios");
     cuerpo.innerHTML = "";
     document.getElementById("mensajeHorarios").textContent = "";
+    document.getElementById("mensajeReserva").textContent = "";
 
     cerrarReserva(); // al cambiar de profesor se cierra el formulario
 

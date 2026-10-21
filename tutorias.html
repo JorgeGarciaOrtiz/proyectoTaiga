@@ -48,6 +48,9 @@
           <tbody id="cuerpoHorarios"></tbody>
         </table>
         <p class="error" id="mensajeHorarios"></p>
+        
+        <!-- #36 Mensaje de reserva correcta -->
+        <p class="exito" id="mensajeReserva"></p>
 
         <!-- #34 Maquetar el formulario de reserva (oculto hasta pulsar "Reservar") -->
         <div id="formularioReserva" class="reserva oculto">
@@ -63,6 +66,8 @@
             placeholder="Escribe aquí tu duda..."
           ></textarea>
 
+          <span class="error" id="errorDuda"></span>
+          
           <!-- #35 Confirmar la reserva -->
           <button id="botonConfirmar" onclick="confirmarReserva()">Confirmar reserva</button>
           <button class="secundario" onclick="cerrarReserva()">Cancelar</button>

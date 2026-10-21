@@ -160,6 +160,12 @@ button.secundario:hover {
   background-color: #999;
 }
 
+/* #36 Mensaje de reserva correcta */
+.exito {
+  color: green;
+  font-size: 15px;
+}
+
 /* Colores según el estado del hueco */
 .libre td {
   background-color: #d4f5d4;
