@@ -253,3 +253,4 @@ function verHorarios(idProfesor) {
 
 // Al cargar la página se muestran todos
 mostrarProfesores(profesores);
+mostrarReservas();
