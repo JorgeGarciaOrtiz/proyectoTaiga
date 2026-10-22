@@ -48,7 +48,7 @@
           <tbody id="cuerpoHorarios"></tbody>
         </table>
         <p class="error" id="mensajeHorarios"></p>
-        
+
         <!-- #36 Mensaje de reserva correcta -->
         <p class="exito" id="mensajeReserva"></p>
 
@@ -67,11 +67,21 @@
           ></textarea>
 
           <span class="error" id="errorDuda"></span>
-          
+
           <!-- #35 Confirmar la reserva -->
-          <button id="botonConfirmar" onclick="confirmarReserva()">Confirmar reserva</button>
+          <button id="botonConfirmar" onclick="confirmarReserva()">
+            Confirmar reserva
+          </button>
           <button class="secundario" onclick="cerrarReserva()">Cancelar</button>
         </div>
+      </div>
+      <div class="columna-reservas">
+        <!-- #37 Maquetar la sección "Mis reservas" -->
+        <h2>Mis reservas</h2>
+        <p id="sinReservas"></p>
+
+        <!-- Las reservas se generan con JavaScript -->
+        <div id="listaReservas"></div>
       </div>
     </div>
   </body>

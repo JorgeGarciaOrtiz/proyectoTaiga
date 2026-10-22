@@ -13,7 +13,7 @@ h2 {
 }
 
 /* Línea de sesión iniciada (centrada arriba) */
-body > p {
+body>p {
   text-align: center;
 }
 
@@ -41,7 +41,8 @@ body > p {
 }
 
 /* Buscador */
-input, textarea {
+input,
+textarea {
   width: 100%;
   padding: 10px;
   font-size: 16px;
@@ -92,7 +93,8 @@ table {
   background-color: white;
 }
 
-th, td {
+th,
+td {
   border: 1px solid #ccc;
   padding: 8px;
   text-align: left;
@@ -171,6 +173,42 @@ button.secundario:hover {
   font-size: 15px;
 }
 
+/* #37 Sección "Mis reservas" */
+.columna-reservas {
+  grid-column: 1;
+  grid-row: 1;
+  max-width: 420px;
+  position: sticky;
+  top: 20px;
+}
+
+.mi-reserva {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 15px;
+}
+
+.mi-reserva h3 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  color: #1f3a5f;
+}
+
+.mi-reserva p {
+  margin: 0 0 6px 0;
+}
+
+button.cancelar {
+  background-color: #b03a3a;
+  margin-top: 10px;
+}
+
+button.cancelar:hover {
+  background-color: #d05050;
+}
+
 /* Colores según el estado del hueco */
 .libre td {
   background-color: #d4f5d4;
@@ -187,12 +225,14 @@ button.secundario:hover {
   }
 
   .columna-profesores,
-  .columna-horarios {
+  .columna-horarios,
+  .columna-reservas {
     max-width: none;
     position: static;
   }
 
-  .columna-horarios {
+  .columna-horarios,
+  .columna-reservas {
     margin-top: 30px;
   }
 }

@@ -167,6 +167,41 @@ function confirmarReserva() {
     // Mensaje de confirmación
     document.getElementById("mensajeReserva").textContent =
         "Tutoría reservada con " + profesorActual + ": " + hueco.dia + " a las " + hueco.hora;
+
+    
+    // Actualizar la lista de "Mis reservas"
+    mostrarReservas();
+}
+
+// #37 Mostrar las reservas del usuario
+function mostrarReservas() {
+    var lista = document.getElementById("listaReservas");
+    lista.innerHTML = "";
+
+    var reservas = JSON.parse(localStorage.getItem("reservas")) || [];
+    var hayReservas = false;
+
+    for (var i = 0; i < reservas.length; i++) {
+        // Solo las reservas del usuario con sesión iniciada
+        if (reservas[i].usuario == usuario) {
+            hayReservas = true;
+
+            lista.innerHTML +=
+                '<div class="mi-reserva">' +
+                '<h3>' + reservas[i].profesor + '</h3>' +
+                '<p>' + reservas[i].dia + ' a las ' + reservas[i].hora + '</p>' +
+                '<p>Duda: ' + reservas[i].duda + '</p>' +
+                '<button class="cancelar">Cancelar reserva</button>' +
+                '</div>';
+        }
+    }
+
+    // Si no hay ninguna, mostramos un mensaje
+    if (hayReservas) {
+        document.getElementById("sinReservas").textContent = "";
+    } else {
+        document.getElementById("sinReservas").textContent = "Todavía no has hecho ninguna reserva";
+    }
 }
 
 // #33 Marcar libres/ocupados y avisar si no hay horarios
