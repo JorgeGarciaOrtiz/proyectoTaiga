@@ -95,8 +95,9 @@ aplicarReservas();
 
 // #34 Abrir y cerrar el formulario de reserva
 
-// Nombre del profesor cuyos horarios se están viendo
+// Nombre y id del profesor cuyos horarios se están viendo
 var profesorActual = "";
+var idProfesorActual = 0;
 
 // Posición del hueco que se está reservando
 var posicionReserva = -1;
@@ -126,6 +127,7 @@ function confirmarReserva() {
     // Limpiar mensajes anteriores
     document.getElementById("errorDuda").textContent = "";
     document.getElementById("mensajeReserva").textContent = "";
+    document.getElementById("mensajeCancelacion").textContent = "";
 
     // Comprobar que el hueco sigue libre
     if (!hueco.libre) {
@@ -191,7 +193,7 @@ function mostrarReservas() {
                 '<h3>' + reservas[i].profesor + '</h3>' +
                 '<p>' + reservas[i].dia + ' a las ' + reservas[i].hora + '</p>' +
                 '<p>Duda: ' + reservas[i].duda + '</p>' +
-                '<button class="cancelar">Cancelar reserva</button>' +
+                '<button class="cancelar" onclick="cancelarReserva(' + i + ')">Cancelar reserva</button>' + 
                 '</div>';
         }
     }
@@ -202,6 +204,38 @@ function mostrarReservas() {
     } else {
         document.getElementById("sinReservas").textContent = "Todavía no has hecho ninguna reserva";
     }
+}
+
+// #38 Cancelar una reserva
+function cancelarReserva(posicion) {
+    // Pedir confirmación antes de cancelar
+    if (!confirm("¿Seguro que quieres cancelar esta reserva?")) {
+        return;
+    }
+
+    var reservas = JSON.parse(localStorage.getItem("reservas")) || [];
+    var reserva = reservas[posicion];
+
+    // Quitar la reserva de localStorage
+    reservas.splice(posicion, 1);
+    localStorage.setItem("reservas", JSON.stringify(reservas));
+
+    // El hueco vuelve a estar libre
+    for (var k = 0; k < horarios.length; k++) {
+        if (horarios[k].profesorId == reserva.profesorId && horarios[k].dia == reserva.dia) {
+            horarios[k].libre = true;
+        }
+    }
+
+    // Si se están viendo los horarios de ese profesor, se vuelve a dibujar la tabla
+    if (idProfesorActual == reserva.profesorId) {
+        verHorarios(reserva.profesorId);
+    }
+
+    // Actualizar la lista de "Mis reservas" y avisar
+    mostrarReservas();
+    document.getElementById("mensajeCancelacion").textContent =
+        "Reserva cancelada: " + reserva.profesor + ", " + reserva.dia + " a las " + reserva.hora;
 }
 
 // #33 Marcar libres/ocupados y avisar si no hay horarios
@@ -218,6 +252,7 @@ function verHorarios(idProfesor) {
         if (profesores[i].id == idProfesor) {
             document.getElementById("profesorElegido").textContent = "Horarios de " + profesores[i].nombre;
             profesorActual = profesores[i].nombre;
+            idProfesorActual = profesores[i].id;
         }
     }
 
