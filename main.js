@@ -69,6 +69,10 @@ function validarLogin() {
     // Guardamos el usuario y pasamos a la página de tutorías
     localStorage.setItem("usuario", email);
     window.location.href = "tutorias.html";
+  } else if (email == "profe@correo.com" && password == "1234") {
+    // #39 El profesor pasa a su página para publicar horarios
+    localStorage.setItem("usuario", email);
+    window.location.href = "profesor.html";
   } else {
     document.getElementById("errorLogin").textContent = "Email o contraseña incorrectos";
   }

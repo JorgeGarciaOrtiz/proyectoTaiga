@@ -1,0 +1,83 @@
+/* General */
+body {
+  font-family: Arial, sans-serif;
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 0 15px;
+  background-color: #f5f7fa;
+  color: #333;
+}
+
+h2 {
+  color: #1f3a5f;
+}
+
+/* Línea de sesión iniciada (centrada arriba) */
+body>p {
+  text-align: center;
+}
+
+/* Botones */
+button {
+  padding: 8px 18px;
+  font-size: 15px;
+  background-color: #1f3a5f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #2f5688;
+}
+
+/* #39 Formulario de publicar horario */
+.publicar {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 25px;
+  margin-top: 20px;
+}
+
+.publicar h2 {
+  margin: 0 0 10px 0;
+  text-align: center;
+}
+
+.publicar p {
+  margin: 0 0 8px 0;
+}
+
+.publicar label {
+  display: block;
+  margin: 15px 0 5px 0;
+}
+
+.publicar select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.publicar button {
+  margin-top: 20px;
+}
+
+/* Mensajes de error y de éxito */
+.error {
+  display: block;
+  margin-top: 5px;
+  color: red;
+  font-size: 14px;
+}
+
+.exito {
+  color: green;
+  font-size: 15px;
+}
