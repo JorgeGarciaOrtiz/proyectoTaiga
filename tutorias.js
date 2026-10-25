@@ -77,6 +77,39 @@ for (var p = 0; p < profesores.length - 2; p++) {
     }
 }
 
+// #40 Añadir los horarios que ha publicado el profesor
+function cargarHorariosPublicados(){
+    var publicados = JSON.parse(localStorage.getItem("horariosPublicados")) || [];
+
+    for(var i = 0; i < publicados.length; i++){
+        horarios.push({
+            profesorId: publicados[i].profesorId,
+            dia: publicados[i].dia,
+            hora: publicados[i].hora,
+            libre: true,
+            publicado: true
+        });
+
+    }
+}
+cargarHorariosPublicados();
+
+// #40 Comprueba si un hueco es el de una reserva (mismo profesor y día)
+
+// Los horarios publicados además tienen que coincidir en la hora,
+
+// porque el profesor puede publicar varias horas el mismo día
+
+function esElHueco(hueco, reserva) {
+    if (hueco.profesorId != reserva.profesorId || hueco.dia != reserva.dia) {
+        return false;
+    }
+    if (hueco.publicado && hueco.hora != reserva.hora) {
+        return false;
+    }
+    return true;
+}
+
 // #35 Volver a marcar como ocupados los huecos ya reservados
 // (los horarios se generan al azar, así que se ajusta la hora de la reserva)
 function aplicarReservas() {
@@ -84,7 +117,7 @@ function aplicarReservas() {
 
     for (var r = 0; r < reservas.length; r++) {
         for (var k = 0; k < horarios.length; k++) {
-            if (horarios[k].profesorId == reservas[r].profesorId && horarios[k].dia == reservas[r].dia) {
+            if (esElHueco(horarios[k], reservas[r])) {
                 horarios[k].hora = reservas[r].hora;
                 horarios[k].libre = false;
             }
@@ -222,7 +255,7 @@ function cancelarReserva(posicion) {
 
     // El hueco vuelve a estar libre
     for (var k = 0; k < horarios.length; k++) {
-        if (horarios[k].profesorId == reserva.profesorId && horarios[k].dia == reserva.dia) {
+        if (esElHueco(horarios[k], reserva)) {
             horarios[k].libre = true;
         }
     }
