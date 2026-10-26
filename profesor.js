@@ -88,16 +88,16 @@ function mostrarPublicados() {
         if (publicados[i].profesorId == profesorId) {
             hayPublicados = true;
 
-            // Por defecto ocupado, y si tiene una reserva lo cambiamos
-            var estado = "Ocupado";
-            var clase = "ocupado";
+            // Por defecto libre, y si tiene una reserva lo cambiamos
+            var estado = "Libre";
+            var clase = "libre";
 
             for (var r = 0; r < reservas.length; r++) {
                 if (reservas[r].profesorId == publicados[i].profesorId &&
                     reservas[r].dia == publicados[i].dia &&
                     reservas[r].hora == publicados[i].hora) {
-                    estado = "Libre";
-                    clase = "libre";
+                    estado = "Ocupado";
+                    clase = "ocupado";
                 }
             }
 
