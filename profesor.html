@@ -44,10 +44,28 @@
       <span class="error" id="errorHora"></span>
 
       <!-- #40 Publicar el horario -->
-      <button id="botonPublicar" onclick="publicarHorario()">Publicar horario</button>
+      <button id="botonPublicar" onclick="publicarHorario()">
+        Publicar horario
+      </button>
 
       <!-- Mensaje de horario publicado (se rellena con JavaScript) -->
       <p class="exito" id="mensajeHorario"></p>
+    </div>
+
+    <!-- #41 Lista de horarios publicados (libres y ocupados) -->
+    <div class="publicados">
+      <h2>Horarios publicados</h2>
+      <p id="sinPublicados"></p>
+      <table>
+        <thead>
+          <tr>
+            <th>Día</th>
+            <th>Hora</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody id="cuerpoPublicados"></tbody>
+      </table>
     </div>
   </body>
 </html>

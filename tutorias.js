@@ -78,20 +78,31 @@ for (var p = 0; p < profesores.length - 2; p++) {
 }
 
 // #40 Añadir los horarios que ha publicado el profesor
-function cargarHorariosPublicados(){
-    var publicados = JSON.parse(localStorage.getItem("horariosPublicados")) || [];
 
-    for(var i = 0; i < publicados.length; i++){
+function cargarHorariosPublicados() {
+    var publicados = JSON.parse(localStorage.getItem("horariosPublicados")) || [];
+    var reservas = JSON.parse(localStorage.getItem("reservas")) || [];
+    for (var i = 0; i < publicados.length; i++) {
+        // El horario está libre salvo que ya tenga una reserva
+        var libre = true;
+        for (var r = 0; r < reservas.length; r++) {
+            if (reservas[r].profesorId == publicados[i].profesorId &&
+                reservas[r].dia == publicados[i].dia &&
+                reservas[r].hora == publicados[i].hora) {
+                libre = false;
+            }
+        }
         horarios.push({
             profesorId: publicados[i].profesorId,
             dia: publicados[i].dia,
             hora: publicados[i].hora,
-            libre: true,
-            publicado: true
+            libre: libre
         });
-
     }
 }
+
+// #40 Cargar los horarios publicados por el profesor
+
 cargarHorariosPublicados();
 
 // #40 Comprueba si un hueco es el de una reserva (mismo profesor y día)

@@ -81,3 +81,42 @@ button:hover {
   color: green;
   font-size: 15px;
 }
+
+/* #41 Lista de horarios publicados */
+.publicados {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 25px;
+  margin-top: 20px;
+}
+
+.publicados h2 {
+  margin: 0 0 10px 0;
+  text-align: center;
+}
+
+.publicados table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.publicados th,
+.publicados td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.publicados th {
+  background-color: #1f3a5f;
+  color: white;
+}
+
+.publicados tr.libre td {
+  color: green;
+}
+
+.publicados tr.ocupado td {
+  color: red;
+}
