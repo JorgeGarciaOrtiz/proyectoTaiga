@@ -56,12 +56,18 @@
     <div class="publicados">
       <h2>Horarios publicados</h2>
       <p id="sinPublicados"></p>
+
+      <!-- Mensajes al borrar un horario (se rellenan con JavaScript) -->
+      <p class="error" id="errorBorrar"></p>
+      <p class="exito" id="mensajeBorrar"></p>
+
       <table>
         <thead>
           <tr>
             <th>Día</th>
             <th>Hora</th>
             <th>Estado</th>
+            <th></th>
           </tr>
         </thead>
         <tbody id="cuerpoPublicados"></tbody>

@@ -26,6 +26,8 @@ function publicarHorario() {
     document.getElementById("errorDia").textContent = "";
     document.getElementById("errorHora").textContent = "";
     document.getElementById("mensajeHorario").textContent = "";
+    document.getElementById("errorBorrar").textContent = "";
+    document.getElementById("mensajeBorrar").textContent = "";
 
     var hayError = false;
 
@@ -88,21 +90,21 @@ function mostrarPublicados() {
         if (publicados[i].profesorId == profesorId) {
             hayPublicados = true;
 
-            // Por defecto ocupado, y si tiene una reserva lo cambiamos
-            var estado = "Ocupado";
-            var clase = "ocupado";
+            // Por defecto libre, y si tiene una reserva lo cambiamos
+            var estado = "Libre";
+            var clase = "libre";
 
             for (var r = 0; r < reservas.length; r++) {
                 if (reservas[r].profesorId == publicados[i].profesorId &&
                     reservas[r].dia == publicados[i].dia &&
                     reservas[r].hora == publicados[i].hora) {
-                    estado = "Libre";
-                    clase = "libre";
+                    estado = "Ocupado";
+                    clase = "ocupado";
                 }
             }
 
             cuerpo.innerHTML +=
-                '<tr class="' + clase + '"><td>' + publicados[i].dia + '</td><td>' + publicados[i].hora + '</td><td>' + estado + '</td></tr>';
+                '<tr class="' + clase + '"><td>' + publicados[i].dia + '</td><td>' + publicados[i].hora + '</td><td>' + estado + '</td><td><button class="borrar" onclick="borrarHorario(' + i + ')">Borrar</button></td></tr>';
         }
     }
 
@@ -112,6 +114,43 @@ function mostrarPublicados() {
     } else {
         document.getElementById("sinPublicados").textContent = "Todavía no has publicado ningún horario";
     }
+}
+
+// #41 Borrar un horario publicado
+function borrarHorario(posicion) {
+    // Limpiar mensajes anteriores
+    document.getElementById("errorBorrar").textContent = "";
+    document.getElementById("mensajeBorrar").textContent = "";
+    document.getElementById("mensajeHorario").textContent = "";
+
+    var publicados = JSON.parse(localStorage.getItem("horariosPublicados")) || [];
+    var reservas = JSON.parse(localStorage.getItem("reservas")) || [];
+    var horario = publicados[posicion];
+
+    // No se puede borrar un horario que ya está reservado
+    for (var r = 0; r < reservas.length; r++) {
+        if (reservas[r].profesorId == horario.profesorId &&
+            reservas[r].dia == horario.dia &&
+            reservas[r].hora == horario.hora) {
+            document.getElementById("errorBorrar").textContent =
+                "No puedes borrar un horario que ya está reservado";
+            return;
+        }
+    }
+
+    // Pedir confirmación antes de borrar
+    if (!confirm("¿Seguro que quieres borrar este horario?")) {
+        return;
+    }
+
+    // Quitar el horario de localStorage
+    publicados.splice(posicion, 1);
+    localStorage.setItem("horariosPublicados", JSON.stringify(publicados));
+
+    // Actualizar la lista y avisar
+    mostrarPublicados();
+    document.getElementById("mensajeBorrar").textContent =
+        "Horario borrado: " + horario.dia + " a las " + horario.hora;
 }
 
 // Al cargar la página se muestran los horarios publicados

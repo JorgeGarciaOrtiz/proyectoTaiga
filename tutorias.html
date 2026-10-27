@@ -86,6 +86,18 @@
 
         <!-- Las reservas se generan con JavaScript -->
         <div id="listaReservas"></div>
+                <!-- #42 Maquetar el formulario de comentario (oculto hasta pulsar "Comentar") -->
+
+        <div id="formularioComentario" class="reserva oculto">
+          <h3>Añadir comentario</h3>
+          <p><strong>Profesor:</strong> <span id="comentarioProfesor"></span></p>
+          <p><strong>Día y hora:</strong> <span id="comentarioFecha"></span></p>
+          <label for="comentario">¿Quieres añadir algún comentario?</label>
+          <textarea id="comentario" rows="3" placeholder="Escribe aquí tu comentario..."></textarea>
+          <span class="error" id="errorComentario"></span>
+          <button id="botonComentar">Guardar comentario</button>
+          <button class="secundario" id="botonCerrarComentario">Cancelar</button>
+        </div>
       </div>
     </div>
   </body>
