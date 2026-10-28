@@ -101,25 +101,6 @@ function cargarHorariosPublicados() {
     }
 }
 
-// #40 Cargar los horarios publicados por el profesor
-
-cargarHorariosPublicados();
-
-// #40 Comprueba si un hueco es el de una reserva (mismo profesor y día)
-
-// Los horarios publicados además tienen que coincidir en la hora,
-
-// porque el profesor puede publicar varias horas el mismo día
-
-function esElHueco(hueco, reserva) {
-    if (hueco.profesorId != reserva.profesorId || hueco.dia != reserva.dia) {
-        return false;
-    }
-    if (hueco.publicado && hueco.hora != reserva.hora) {
-        return false;
-    }
-    return true;
-}
 
 // #35 Volver a marcar como ocupados los huecos ya reservados
 // (los horarios se generan al azar, así que se ajusta la hora de la reserva)
@@ -128,7 +109,7 @@ function aplicarReservas() {
 
     for (var r = 0; r < reservas.length; r++) {
         for (var k = 0; k < horarios.length; k++) {
-            if (esElHueco(horarios[k], reservas[r])) {
+            if (horarios[k].profesorId == reservas[r].profesorId && horarios[k].dia == reservas[r].dia) {
                 horarios[k].hora = reservas[r].hora;
                 horarios[k].libre = false;
             }
@@ -136,6 +117,9 @@ function aplicarReservas() {
     }
 }
 aplicarReservas();
+
+// #40 Cargar los horarios publicados por el profesor
+cargarHorariosPublicados();
 
 // #34 Abrir y cerrar el formulario de reserva
 
@@ -232,12 +216,20 @@ function mostrarReservas() {
         if (reservas[i].usuario == usuario) {
             hayReservas = true;
 
+            // #43 Si la reserva tiene comentario, se muestra
+            var comentario = "";
+            if (reservas[i].comentario) {
+                comentario = '<div class="comentario"><strong>Comentario:</strong> ' + reservas[i].comentario + '</div>';
+            }
+
             lista.innerHTML +=
                 '<div class="mi-reserva">' +
                 '<h3>' + reservas[i].profesor + '</h3>' +
                 '<p>' + reservas[i].dia + ' a las ' + reservas[i].hora + '</p>' +
                 '<p>Duda: ' + reservas[i].duda + '</p>' +
-                '<button class="cancelar" onclick="cancelarReserva(' + i + ')">Cancelar reserva</button>' + 
+                comentario +
+                '<button class="comentar" onclick="abrirComentario(' + i + ')">Comentar</button>' +
+                '<button class="cancelar" onclick="cancelarReserva(' + i + ')">Cancelar reserva</button>' +
                 '</div>';
         }
     }
@@ -266,7 +258,7 @@ function cancelarReserva(posicion) {
 
     // El hueco vuelve a estar libre
     for (var k = 0; k < horarios.length; k++) {
-        if (esElHueco(horarios[k], reserva)) {
+        if (horarios[k].profesorId == reserva.profesorId && horarios[k].dia == reserva.dia) {
             horarios[k].libre = true;
         }
     }
@@ -327,6 +319,74 @@ function verHorarios(idProfesor) {
     // Si no hay ninguno, mostramos un mensaje
     if (!hayHorarios) {
         document.getElementById("mensajeHorarios").textContent = "Este profesor no tiene horarios publicados";
+    }
+}
+
+// #43 Añadir un comentario a una reserva
+// Datos de la reserva que se está comentando
+var reservaComentada = null;
+// Muestra el formulario con los datos de la reserva elegida
+function abrirComentario(posicion) {
+    var reservas = JSON.parse(localStorage.getItem("reservas")) || [];
+    var reserva = reservas[posicion];
+
+    reservaComentada = {
+        profesorId: reserva.profesorId,
+        dia: reserva.dia,
+        hora: reserva.hora
+    };
+    //document.getElementById("comentarioProfesor").textContent = reserva.profesor;
+    document.getElementById("comentarioFecha").textContent = reserva.dia + " a las " + reserva.hora;
+    document.getElementById("comentario").value = reserva.comentario || "";
+    document.getElementById("errorComentario").textContent = "";
+    document.getElementById("mensajeComentario").textContent = "";
+    document.getElementById("formularioComentario").classList.remove("oculto");
+}
+
+// Oculta el formulario
+function cerrarComentario() {
+    document.getElementById("formularioComentario").classList.add("oculto");
+}
+// Validar el comentario, guardarlo y mostrar mensajes
+function guardarComentario() {
+    var comentario = document.getElementById("comentario").value.trim();
+
+    // Limpiar mensajes anteriores
+    document.getElementById("errorComentario").textContent = "";
+    document.getElementById("mensajeComentario").textContent = "";
+    document.getElementById("mensajeCancelacion").textContent = "";
+    // Buscar la reserva que se está comentando
+    var reservas = JSON.parse(localStorage.getItem("reservas")) || [];
+    var posicion = -1;
+
+    for (var i = 0; i < reservas.length; i++) {
+        if (reservas[i].usuario == usuario &&
+            reservas[i].profesorId == reservaComentada.profesorId &&
+            reservas[i].dia == reservaComentada.dia &&
+            reservas[i].hora == reservaComentada.hora) {
+            posicion = i;
+        }
+    }
+    if (comentario == "") {
+        // El comentario es obligatorio
+        document.getElementById("errorComentario").textContent = "El comentario es obligatorio";
+    } else if (comentario.length < 5) {
+        // Tiene que tener al menos 5 caracteres
+        document.getElementById("errorComentario").textContent = "Escribe al menos 5 caracteres";
+    } else if (comentario.length > 200) {
+        // No puede pasar de 200 caracteres
+        document.getElementById("errorComentario").textContent = "El comentario no puede tener más de 200 caracteres";
+    } else if (posicion == -1) {
+        // La reserva ya no existe (se ha cancelado)
+        document.getElementById("errorComentario").textContent = "Esa reserva ya no existe";
+    } else {
+        // Guardar el comentario en localStorage
+        reservas[posicion].comentario = comentario;
+        localStorage.setItem("reservas", JSON.stringify(reservas));
+        // Cerrar el formulario, actualizar "Mis reservas" y avisar
+        cerrarComentario();
+        mostrarReservas();
+        document.getElementById("mensajeComentario").textContent = "Comentario añadido: " + reservaComentada.dia + " a las " + reservaComentada.hora;
     }
 }
 
