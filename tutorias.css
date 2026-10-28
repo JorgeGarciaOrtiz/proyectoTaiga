@@ -13,7 +13,7 @@ h2 {
 }
 
 /* Línea de sesión iniciada (centrada arriba) */
-body > p {
+body>p {
   text-align: center;
 }
 
@@ -41,7 +41,8 @@ body > p {
 }
 
 /* Buscador */
-input {
+input,
+textarea {
   width: 100%;
   padding: 10px;
   font-size: 16px;
@@ -92,7 +93,8 @@ table {
   background-color: white;
 }
 
-th, td {
+th,
+td {
   border: 1px solid #ccc;
   padding: 8px;
   text-align: left;
@@ -107,6 +109,104 @@ th {
 .error {
   color: red;
   font-size: 14px;
+}
+
+/* #34 Botón "Reservar" dentro de la tabla (más pequeño) */
+td button {
+  padding: 4px 10px;
+  font-size: 14px;
+}
+
+/* #34 Formulario de reserva */
+.oculto {
+  display: none;
+}
+
+.reserva {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.reserva h3 {
+  margin: 0 0 15px 0;
+  color: #1f3a5f;
+}
+
+.reserva p {
+  margin: 0 0 8px 0;
+}
+
+.reserva label {
+  display: block;
+  margin: 15px 0 5px 0;
+}
+
+.reserva textarea {
+  font-family: Arial, sans-serif;
+  resize: vertical;
+}
+
+.reserva .error {
+  display: block;
+  margin-top: 5px;
+}
+
+.reserva button {
+  margin-top: 15px;
+  margin-right: 8px;
+}
+
+button.secundario {
+  background-color: #777;
+}
+
+button.secundario:hover {
+  background-color: #999;
+}
+
+/* #36 Mensaje de reserva correcta */
+.exito {
+  color: green;
+  font-size: 15px;
+}
+
+/* #37 Sección "Mis reservas" */
+.columna-reservas {
+  grid-column: 1;
+  grid-row: 1;
+  max-width: 420px;
+  position: sticky;
+  top: 20px;
+}
+
+.mi-reserva {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 15px;
+}
+
+.mi-reserva h3 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  color: #1f3a5f;
+}
+
+.mi-reserva p {
+  margin: 0 0 6px 0;
+}
+
+button.cancelar {
+  background-color: #b03a3a;
+  margin-top: 10px;
+}
+
+button.cancelar:hover {
+  background-color: #d05050;
 }
 
 /* Colores según el estado del hueco */
@@ -125,12 +225,35 @@ th {
   }
 
   .columna-profesores,
-  .columna-horarios {
+  .columna-horarios,
+  .columna-reservas {
     max-width: none;
     position: static;
   }
 
-  .columna-horarios {
+  .columna-horarios,
+  .columna-reservas {
     margin-top: 30px;
   }
 }
+/* #42 Botón "Comentar" dentro de cada reserva */
+
+button.comentar {
+  background-color: #2e7d6b;
+  margin-top: 10px;
+  margin-right: 8px;
+}
+button.comentar:hover {
+  background-color: #3f9a85;
+}
+/* #42 Comentario guardado dentro de una reserva */
+.mi-reserva .comentario {
+  background-color: #eef3f9;
+  border-left: 4px solid #1f3a5f;
+  border-radius: 4px;
+  padding: 8px 10px;
+  margin-top: 8px;
+}
+
+
+

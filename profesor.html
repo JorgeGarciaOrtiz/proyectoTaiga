@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Panel del profesor</title>
+    <link rel="stylesheet" href="profesor.css" />
+    <script src="profesor.js" defer></script>
+  </head>
+
+  <body>
+    <!-- Profesor con sesión iniciada -->
+    <p>
+      Sesión iniciada como <span id="nombreUsuario"></span>
+      <button onclick="cerrarSesion()">Cerrar sesión</button>
+    </p>
+
+    <!-- #39 Maquetar el formulario de publicar horario -->
+    <div class="publicar">
+      <h2>Publicar horario</h2>
+      <p>Elige el día y la hora de la tutoría que quieres ofrecer a los alumnos</p>
+
+      <label for="dia">Día</label>
+      <select id="dia">
+        <option value="">Elige un día</option>
+        <option value="Lunes">Lunes</option>
+        <option value="Martes">Martes</option>
+        <option value="Miércoles">Miércoles</option>
+        <option value="Jueves">Jueves</option>
+        <option value="Viernes">Viernes</option>
+        <option value="Sábado">Sábado</option>
+        <option value="Domingo">Domingo</option>
+      </select>
+      <span class="error" id="errorDia"></span>
+
+      <label for="hora">Hora</label>
+      <select id="hora">
+        <option value="">Elige una hora</option>
+        <option value="09:00">09:00</option>
+        <option value="10:00">10:00</option>
+        <option value="11:00">11:00</option>
+        <option value="12:00">12:00</option>
+        <option value="13:00">13:00</option>
+      </select>
+      <span class="error" id="errorHora"></span>
+
+      <!-- #40 Publicar el horario -->
+      <button id="botonPublicar" onclick="publicarHorario()">
+        Publicar horario
+      </button>
+
+      <!-- Mensaje de horario publicado (se rellena con JavaScript) -->
+      <p class="exito" id="mensajeHorario"></p>
+    </div>
+
+    <!-- #41 Lista de horarios publicados (libres y ocupados) -->
+    <div class="publicados">
+      <h2>Horarios publicados</h2>
+      <p id="sinPublicados"></p>
+
+      <!-- Mensajes al borrar un horario (se rellenan con JavaScript) -->
+      <p class="error" id="errorBorrar"></p>
+      <p class="exito" id="mensajeBorrar"></p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Día</th>
+            <th>Hora</th>
+            <th>Estado</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="cuerpoPublicados"></tbody>
+      </table>
+    </div>
+  </body>
+</html>
