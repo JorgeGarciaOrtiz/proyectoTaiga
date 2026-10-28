@@ -335,7 +335,7 @@ function abrirComentario(posicion) {
         dia: reserva.dia,
         hora: reserva.hora
     };
-    //document.getElementById("comentarioProfesor").textContent = reserva.profesor;
+    document.getElementById("comentarioProfesor").textContent = reserva.profesor;
     document.getElementById("comentarioFecha").textContent = reserva.dia + " a las " + reserva.hora;
     document.getElementById("comentario").value = reserva.comentario || "";
     document.getElementById("errorComentario").textContent = "";
