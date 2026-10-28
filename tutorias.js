@@ -78,7 +78,7 @@ for (var p = 0; p < profesores.length - 2; p++) {
 }
 
 // #40 Añadir los horarios que ha publicado el profesor
-
+// (se cargan después de aplicarReservas, así que aquí se marcan los ocupados)
 function cargarHorariosPublicados() {
     var publicados = JSON.parse(localStorage.getItem("horariosPublicados")) || [];
     var reservas = JSON.parse(localStorage.getItem("reservas")) || [];
